@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bldhsjfm0rhvh"]
+
+[ext_resource type="PackedScene" uid="uid://4eir2yvvm4ty" path="res://Level/map.tscn" id="1_1jnvk"]
+[ext_resource type="PackedScene" uid="uid://y4s01lj3s316" path="res://Characters/player.tscn" id="1_a7bpo"]
+[ext_resource type="PackedScene" uid="uid://bkyi32oc8ua6r" path="res://Characters/depression.tscn" id="1_nmfnp"]
+
+[node name="Game Scene" type="Node2D"]
+
+[node name="Depression" parent="." instance=ExtResource("1_nmfnp")]
+position = Vector2(1696, 736)
+
+[node name="Player" parent="." instance=ExtResource("1_a7bpo")]
+position = Vector2(288, 288)
+
+[node name="Map" parent="." instance=ExtResource("1_1jnvk")]

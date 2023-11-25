@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnkepayren8s1"]
+
+[ext_resource type="Script" path="res://Level/path.gd" id="1_088iw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7jfg"]
+size = Vector2(64, 64)
+
+[node name="Path" type="Area2D" node_paths=PackedStringArray("shape")]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_088iw")
+shape = NodePath("Shape")
+
+[node name="Shape" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.239216)
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n7jfg")

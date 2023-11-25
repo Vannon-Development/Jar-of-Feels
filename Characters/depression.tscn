@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkyi32oc8ua6r"]
+
+[ext_resource type="Script" path="res://Characters/depression.gd" id="1_cb5h7"]
+[ext_resource type="Script" path="res://Characters/effect.gd" id="2_nivk6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3i8q"]
+size = Vector2(60, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byyaj"]
+radius = 384.0
+
+[node name="Depression" type="Area2D" node_paths=PackedStringArray("effect")]
+collision_layer = 4
+script = ExtResource("1_cb5h7")
+effect = NodePath("Effect")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.141176, 0.498039, 1, 1)
+polygon = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n3i8q")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 33
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_byyaj")
+
+[node name="Effect" type="Node2D" parent="."]
+script = ExtResource("2_nivk6")
+color = Color(0.101961, 0.160784, 1, 1)
+distance = 384.0
+high_alpha = 0.4
+
+[connection signal="area_entered" from="Area2D" to="." method="_area_detected"]
+[connection signal="area_exited" from="Area2D" to="." method="_area_lost"]
