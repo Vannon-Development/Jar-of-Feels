@@ -35,7 +35,11 @@ func _physics_process(delta: float):
 				dist -= (bound - position).length()
 				next_pos = bound + next_move * dist
 				_motion = next_move
+		center_tile(GameControl.map.current_tile(next_pos))
 	position = next_pos
+
+func center_tile(_tile: Vector2i):
+	pass
 
 func _will_cross_boundary(pos1: Vector2, pos2: Vector2) -> bool:
 	var x_zero := _near_zero(pos1.x - pos2.x)

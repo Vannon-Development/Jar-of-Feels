@@ -2,6 +2,9 @@ class_name Player extends CharacterBase
 
 var effects: Array[Effect] = []
 
+func _init():
+	GameControl.player = self
+
 func _process(_delta: float):
 	var x := Input.get_axis("Left", "Right")
 	var y := Input.get_axis("Up", "Down")

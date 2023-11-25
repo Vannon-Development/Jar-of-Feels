@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkyi32oc8ua6r"]
 
-[ext_resource type="Script" path="res://Characters/depression.gd" id="1_cb5h7"]
+[ext_resource type="Script" path="res://Characters/enemy_base.gd" id="1_37amw"]
 [ext_resource type="Script" path="res://Characters/effect.gd" id="2_nivk6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3i8q"]
@@ -11,8 +11,9 @@ radius = 384.0
 
 [node name="Depression" type="Area2D" node_paths=PackedStringArray("effect")]
 collision_layer = 4
-script = ExtResource("1_cb5h7")
+script = ExtResource("1_37amw")
 effect = NodePath("Effect")
+step_speed = 2.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.141176, 0.498039, 1, 1)
