@@ -1,16 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dya41qc6td7pk"]
+[gd_scene load_steps=3 format=3 uid="uid://dya41qc6td7pk"]
+
+[ext_resource type="Texture2D" uid="uid://ddtvdvhtvu71b" path="res://Items/Jam.png" id="1_sechb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ud4pm"]
 radius = 30.0
 
 [node name="Jam Spot" type="Area2D"]
+z_index = -2
 collision_layer = 64
 collision_mask = 4
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-scale = Vector2(0.5, 0.5)
-color = Color(1, 0, 0.368627, 1)
-polygon = PackedVector2Array(-25.9, -39.75, -9.65002, -46.25, 4.34998, -39.25, 18.1, -41.75, 23.6, -30.5, 31.85, -18.75, 44.6, -14.5, 38.85, 6.75, 25.6, 12, 16.85, 21.75, 19.6, 32.5, 14.35, 46.5, 4.84998, 46.5, -17.9, 38.25, -11.65, 26, -10.4, 16.25, -21.9, 9, -34.15, 9.75, -39.65, 0.25, -48.4, -15.25, -36.65, -22)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ud4pm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sechb")

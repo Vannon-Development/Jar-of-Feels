@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djgcehhiviupy"
-path="res://.godot/imported/Blue-Walk-1.png-e4be0e8d44ca7d28a3585f9694cbb21a.ctex"
+uid="uid://ddw4b45ldh43l"
+path="res://.godot/imported/Manic-Jam.png-65f27c628284fe363eb38b24f360efe2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Blue-Walk-1.png"
-dest_files=["res://.godot/imported/Blue-Walk-1.png-e4be0e8d44ca7d28a3585f9694cbb21a.ctex"]
+source_file="res://Characters/Manic-Jam.png"
+dest_files=["res://.godot/imported/Manic-Jam.png-65f27c628284fe363eb38b24f360efe2.ctex"]
 
 [params]
 

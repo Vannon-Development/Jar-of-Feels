@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dte1w5jg6l07e"
-path="res://.godot/imported/Blue-Walk-2.png-0fd81b79745d6a770853c80b525eb6ec.ctex"
+uid="uid://331nr8t5mw5s"
+path="res://.godot/imported/Jar.png-c7f056894ccc09c4dd3d0f4c9d30062b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Blue-Walk-2.png"
-dest_files=["res://.godot/imported/Blue-Walk-2.png-0fd81b79745d6a770853c80b525eb6ec.ctex"]
+source_file="res://Items/Jar.png"
+dest_files=["res://.godot/imported/Jar.png-c7f056894ccc09c4dd3d0f4c9d30062b.ctex"]
 
 [params]
 

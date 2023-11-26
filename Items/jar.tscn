@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctlbqoyk642ts"]
+[gd_scene load_steps=4 format=3 uid="uid://ctlbqoyk642ts"]
 
 [ext_resource type="Script" path="res://Items/jar.gd" id="1_5mlx3"]
+[ext_resource type="Texture2D" uid="uid://331nr8t5mw5s" path="res://Items/Jar.png" id="2_iyyra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltk3d"]
 size = Vector2(64, 64)
 
 [node name="Jar" type="Area2D"]
+z_index = -1
 collision_layer = 8
 script = ExtResource("1_5mlx3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ltk3d")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0.321569, 0.321569, 1)
-polygon = PackedVector2Array(-21, -24, 19, -24, 16, -17, 21, -13, 21, 24, 16, 29, -18, 29, -23, 24, -23, -12, -18, -17)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_iyyra")

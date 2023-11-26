@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd2kj8rhe83rt"
-path="res://.godot/imported/Blue-Idle.png-ff3be9191fa01d07fab12e4b310840ee.ctex"
+uid="uid://co5mfdjq1cqrp"
+path="res://.godot/imported/Manic-Walk-1.png-241cee7a35a41470fb3d8e5e2e7a1867.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Blue-Idle.png"
-dest_files=["res://.godot/imported/Blue-Idle.png-ff3be9191fa01d07fab12e4b310840ee.ctex"]
+source_file="res://Characters/Manic-Walk-1.png"
+dest_files=["res://.godot/imported/Manic-Walk-1.png-241cee7a35a41470fb3d8e5e2e7a1867.ctex"]
 
 [params]
 

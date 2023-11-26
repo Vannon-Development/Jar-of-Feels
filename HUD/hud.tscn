@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://t7f5fm5hvso"]
+[gd_scene load_steps=5 format=3 uid="uid://t7f5fm5hvso"]
 
 [ext_resource type="Script" path="res://HUD/hud.gd" id="1_ehk3n"]
 [ext_resource type="LabelSettings" uid="uid://ix8fdkv4mkbl" path="res://HUD/hud_text_settings.tres" id="1_nb6bc"]
+[ext_resource type="Texture2D" uid="uid://7o7s4e3ml6i0" path="res://Characters/Depression-Idle.png" id="3_qxpj8"]
+[ext_resource type="Texture2D" uid="uid://cgtij2200ls8t" path="res://Characters/Manic-Idle.png" id="4_ddq73"]
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("jam_count")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("jam_count", "depression_count", "manic_count")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,19 +14,62 @@ offset_left = 3160.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ehk3n")
-jam_count = NodePath("HBoxContainer/Jam Count")
+jam_count = NodePath("VBoxContainer/Jam Line/Jam Count")
+depression_count = NodePath("VBoxContainer/Depression Line/Depression Count")
+manic_count = NodePath("VBoxContainer/Manic Line/Manic Count")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Jam Prompt" type="Label" parent="HBoxContainer"]
+[node name="Jam Line" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Jam Prompt" type="Label" parent="VBoxContainer/Jam Line"]
 layout_mode = 2
 text = "Jam Left: "
 label_settings = ExtResource("1_nb6bc")
 
-[node name="Jam Count" type="Label" parent="HBoxContainer"]
+[node name="Jam Count" type="Label" parent="VBoxContainer/Jam Line"]
 layout_mode = 2
 text = "999"
+label_settings = ExtResource("1_nb6bc")
+
+[node name="Depression Line" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Depression Image" type="TextureRect" parent="VBoxContainer/Depression Line"]
+layout_mode = 2
+texture = ExtResource("3_qxpj8")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Depression Label" type="Label" parent="VBoxContainer/Depression Line"]
+layout_mode = 2
+text = " x "
+label_settings = ExtResource("1_nb6bc")
+
+[node name="Depression Count" type="Label" parent="VBoxContainer/Depression Line"]
+layout_mode = 2
+text = "99"
+label_settings = ExtResource("1_nb6bc")
+
+[node name="Manic Line" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Manic Image" type="TextureRect" parent="VBoxContainer/Manic Line"]
+layout_mode = 2
+texture = ExtResource("4_ddq73")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Manic Label" type="Label" parent="VBoxContainer/Manic Line"]
+layout_mode = 2
+text = " x "
+label_settings = ExtResource("1_nb6bc")
+
+[node name="Manic Count" type="Label" parent="VBoxContainer/Manic Line"]
+layout_mode = 2
+text = "99"
 label_settings = ExtResource("1_nb6bc")

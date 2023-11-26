@@ -24,7 +24,7 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed("Jam") and jam_shots != 0:
 		_drop_jam()
 
-func before_center_tile(tile: Vector2i):
+func before_center_tile(_tile: Vector2i):
 	if randf() < _manic_mod():
 		_input = _motion
 
@@ -65,6 +65,11 @@ func _on_hit_area(area: Area2D):
 		jam_shots += (area as Jar).charges
 		GameControl.map.generate_jam()
 		area.queue_free()
+	elif area is EnemyBase:
+		var enemy := area as EnemyBase
+		if enemy.jammed:
+			GameControl.enemies.remove_at(GameControl.enemies.find(enemy))
+			enemy.queue_free()
 
 func _drop_jam():
 	var tile := GameControl.map.current_tile(global_position)

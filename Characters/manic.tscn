@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://otb54j188set"]
+[gd_scene load_steps=10 format=3 uid="uid://otb54j188set"]
 
-[ext_resource type="Script" path="res://Characters/enemy_base.gd" id="1_xdaqy"]
+[ext_resource type="Script" path="res://Characters/manic.gd" id="1_42x4q"]
 [ext_resource type="Script" path="res://Characters/effect.gd" id="2_t86yj"]
-[ext_resource type="Texture2D" uid="uid://bd2kj8rhe83rt" path="res://Characters/Blue-Idle.png" id="3_om28e"]
-[ext_resource type="Texture2D" uid="uid://djgcehhiviupy" path="res://Characters/Blue-Walk-1.png" id="4_cdwar"]
-[ext_resource type="Texture2D" uid="uid://dte1w5jg6l07e" path="res://Characters/Blue-Walk-2.png" id="5_wsfjd"]
+[ext_resource type="Texture2D" uid="uid://cgtij2200ls8t" path="res://Characters/Manic-Idle.png" id="3_yuwm1"]
+[ext_resource type="Texture2D" uid="uid://co5mfdjq1cqrp" path="res://Characters/Manic-Walk-1.png" id="4_ltkyq"]
+[ext_resource type="Texture2D" uid="uid://sjpbcv2qouav" path="res://Characters/Manic-Walk-2.png" id="5_mylhq"]
+[ext_resource type="Texture2D" uid="uid://ddw4b45ldh43l" path="res://Characters/Manic-Jam.png" id="6_4s48w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3i8q"]
 size = Vector2(60, 60)
@@ -16,29 +17,30 @@ radius = 384.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_om28e")
+"texture": ExtResource("3_yuwm1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_cdwar")
+"texture": ExtResource("4_ltkyq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_om28e")
+"texture": ExtResource("3_yuwm1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_wsfjd")
+"texture": ExtResource("5_mylhq")
 }],
 "loop": true,
 "name": &"default",
 "speed": 6.0
 }]
 
-[node name="Manic" type="Area2D" node_paths=PackedStringArray("effect", "idle", "walking")]
+[node name="Manic" type="Area2D" node_paths=PackedStringArray("effect", "idle", "walking", "jam_visual")]
 collision_layer = 4
 collision_mask = 64
-script = ExtResource("1_xdaqy")
+script = ExtResource("1_42x4q")
 effect = NodePath("Effect")
-idle = NodePath("Sprite2D")
-walking = NodePath("AnimatedSprite2D")
+idle = NodePath("Idle")
+walking = NodePath("Walk")
+jam_visual = NodePath("Jam")
 jam_timer = 8.0
 follow_variance = 1.0
 step_speed = 6.0
@@ -46,12 +48,12 @@ step_speed = 6.0
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n3i8q")
 
-[node name="Effect Collision" type="Area2D" parent="."]
+[node name="Effect Area" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 33
 monitorable = false
 
-[node name="Effect Collider" type="CollisionShape2D" parent="Effect Collision"]
+[node name="Effect Collider" type="CollisionShape2D" parent="Effect Area"]
 shape = SubResource("CircleShape2D_byyaj")
 
 [node name="Effect" type="Node2D" parent="."]
@@ -59,17 +61,19 @@ script = ExtResource("2_t86yj")
 color = Color(0.568627, 0, 0.435294, 1)
 distance = 384.0
 high_alpha = 0.4
-effect_type = 3
+effect_type = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_om28e")
+[node name="Idle" type="Sprite2D" parent="."]
+texture = ExtResource("3_yuwm1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Walk" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jr1rt")
 autoplay = "default"
-frame = 1
 frame_progress = 0.430669
 
+[node name="Jam" type="Sprite2D" parent="."]
+texture = ExtResource("6_4s48w")
+
 [connection signal="area_entered" from="." to="." method="_jam_enter"]
-[connection signal="area_entered" from="Effect Collision" to="." method="_area_detected"]
-[connection signal="area_exited" from="Effect Collision" to="." method="_area_lost"]
+[connection signal="area_entered" from="Effect Area" to="." method="_area_detected"]
+[connection signal="area_exited" from="Effect Area" to="." method="_area_lost"]
