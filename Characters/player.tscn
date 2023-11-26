@@ -1,17 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://y4s01lj3s316"]
+[gd_scene load_steps=8 format=3 uid="uid://y4s01lj3s316"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_sr5a0"]
+[ext_resource type="Texture2D" uid="uid://b8wjasuyxqmom" path="res://Characters/Yellow-Idle.png" id="2_4pkqu"]
+[ext_resource type="PackedScene" uid="uid://dya41qc6td7pk" path="res://Items/jam_spot.tscn" id="2_h8k2f"]
+[ext_resource type="Texture2D" uid="uid://cugwyhac6g762" path="res://Characters/Yellow-Walk-1.png" id="3_xl2eu"]
+[ext_resource type="Texture2D" uid="uid://dlopwgtbwxm8x" path="res://Characters/Yellow-Walk-2.png" id="4_2jrs3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khhs4"]
 size = Vector2(60, 60)
 
-[node name="Player" type="Area2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_l2vto"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4pkqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xl2eu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4pkqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2jrs3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Player" type="Area2D" node_paths=PackedStringArray("idle", "walking")]
 collision_mask = 14
 script = ExtResource("1_sr5a0")
+idle = NodePath("Idle")
+walking = NodePath("Walk")
+jam_drop = ExtResource("2_h8k2f")
 step_speed = 4.0
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_khhs4")
+
+[node name="Idle" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_4pkqu")
+
+[node name="Walk" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l2vto")
+autoplay = "default"
+frame = 3
+frame_progress = 0.98519
+
+[connection signal="area_entered" from="." to="." method="_on_hit_area"]

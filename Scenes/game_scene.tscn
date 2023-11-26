@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bldhsjfm0rhvh"]
+[gd_scene load_steps=5 format=3 uid="uid://bldhsjfm0rhvh"]
 
 [ext_resource type="PackedScene" uid="uid://4eir2yvvm4ty" path="res://Level/map.tscn" id="1_1jnvk"]
 [ext_resource type="PackedScene" uid="uid://y4s01lj3s316" path="res://Characters/player.tscn" id="1_a7bpo"]
 [ext_resource type="PackedScene" uid="uid://bkyi32oc8ua6r" path="res://Characters/depression.tscn" id="1_nmfnp"]
+[ext_resource type="PackedScene" uid="uid://t7f5fm5hvso" path="res://HUD/hud.tscn" id="4_catoh"]
 
 [node name="Game Scene" type="Node2D"]
 
@@ -13,3 +14,9 @@ position = Vector2(1696, 736)
 position = Vector2(288, 288)
 
 [node name="Map" parent="." instance=ExtResource("1_1jnvk")]
+
+[node name="HUD" parent="." instance=ExtResource("4_catoh")]
+offset_left = 3072.0
+offset_top = 192.0
+offset_right = 3072.0
+offset_bottom = 192.0

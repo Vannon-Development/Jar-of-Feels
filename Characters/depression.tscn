@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkyi32oc8ua6r"]
+[gd_scene load_steps=9 format=3 uid="uid://bkyi32oc8ua6r"]
 
 [ext_resource type="Script" path="res://Characters/enemy_base.gd" id="1_37amw"]
 [ext_resource type="Script" path="res://Characters/effect.gd" id="2_nivk6"]
+[ext_resource type="Texture2D" uid="uid://bd2kj8rhe83rt" path="res://Characters/Blue-Idle.png" id="3_voy45"]
+[ext_resource type="Texture2D" uid="uid://djgcehhiviupy" path="res://Characters/Blue-Walk-1.png" id="4_mvd87"]
+[ext_resource type="Texture2D" uid="uid://dte1w5jg6l07e" path="res://Characters/Blue-Walk-2.png" id="5_ujn4f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3i8q"]
 size = Vector2(60, 60)
@@ -9,25 +12,45 @@ size = Vector2(60, 60)
 [sub_resource type="CircleShape2D" id="CircleShape2D_byyaj"]
 radius = 384.0
 
-[node name="Depression" type="Area2D" node_paths=PackedStringArray("effect")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jr1rt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_voy45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mvd87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_voy45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ujn4f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Depression" type="Area2D" node_paths=PackedStringArray("effect", "idle", "walking")]
 collision_layer = 4
+collision_mask = 64
 script = ExtResource("1_37amw")
 effect = NodePath("Effect")
-step_speed = 2.0
+idle = NodePath("Sprite2D")
+walking = NodePath("AnimatedSprite2D")
+jam_timer = 8.0
+step_speed = 3.0
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.141176, 0.498039, 1, 1)
-polygon = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n3i8q")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Effect Collision" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 33
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Effect Collider" type="CollisionShape2D" parent="Effect Collision"]
 shape = SubResource("CircleShape2D_byyaj")
 
 [node name="Effect" type="Node2D" parent="."]
@@ -36,5 +59,15 @@ color = Color(0.101961, 0.160784, 1, 1)
 distance = 384.0
 high_alpha = 0.4
 
-[connection signal="area_entered" from="Area2D" to="." method="_area_detected"]
-[connection signal="area_exited" from="Area2D" to="." method="_area_lost"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_voy45")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jr1rt")
+autoplay = "default"
+frame = 1
+frame_progress = 0.430669
+
+[connection signal="area_entered" from="." to="." method="_jam_enter"]
+[connection signal="area_entered" from="Effect Collision" to="." method="_area_detected"]
+[connection signal="area_exited" from="Effect Collision" to="." method="_area_lost"]

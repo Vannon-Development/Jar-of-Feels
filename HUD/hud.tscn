@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://t7f5fm5hvso"]
+
+[ext_resource type="Script" path="res://HUD/hud.gd" id="1_ehk3n"]
+[ext_resource type="LabelSettings" uid="uid://ix8fdkv4mkbl" path="res://HUD/hud_text_settings.tres" id="1_nb6bc"]
+
+[node name="HUD" type="Control" node_paths=PackedStringArray("jam_count")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3160.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ehk3n")
+jam_count = NodePath("HBoxContainer/Jam Count")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Jam Prompt" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Jam Left: "
+label_settings = ExtResource("1_nb6bc")
+
+[node name="Jam Count" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "999"
+label_settings = ExtResource("1_nb6bc")

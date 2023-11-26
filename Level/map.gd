@@ -1,5 +1,7 @@
 class_name Map extends TileMap
 
+@export var jam_scene: PackedScene
+
 var _path_tiles: Array[Vector2i]
 var _intersections: Array[Vector2i]
 
@@ -14,6 +16,7 @@ func _ready():
 	_path_tiles = get_used_cells_by_id(0, 0, Vector2i.ZERO, 2)
 	for tile in _path_tiles:
 		if _is_intersection(tile): _intersections.append(tile)
+	generate_jam()
 
 func current_tile(pos: Vector2) -> Vector2i:
 	return local_to_map(pos)
@@ -29,7 +32,6 @@ func choose_path(tile: Vector2i, previous: Vector2i = Vector2i.ZERO, direction: 
 	var near_dir: Vector2i = Vector2i.ZERO
 	for item in possible:
 		var dot := direction.normalized().dot(Vector2(item - tile))
-		print("Tile: %s, Item: %s, Dot: %f" % [tile, item, dot])
 		if dot > near:
 			near = dot
 			near_dir = item
@@ -44,6 +46,15 @@ func next_tile_on_path(tile: Vector2i, direction: Vector2i) -> Vector2i:
 		if t != prev_tile: return t
 	return Vector2i.ZERO
 
+func generate_jam():
+	var pos := map_to_local(_random_tile())
+	var jar := jam_scene.instantiate()
+	add_sibling.call_deferred(jar)
+	jar.position = pos
+
+func _random_tile() -> Vector2i:
+	return _path_tiles.pick_random()
+
 func _connected_tiles(tile: Vector2i) -> Array[Vector2i]:
 	var ret_val: Array[Vector2i] = []
 	for dir in _directions:
@@ -53,3 +64,4 @@ func _connected_tiles(tile: Vector2i) -> Array[Vector2i]:
 func _is_intersection(tile: Vector2i) -> bool:
 	var tiles := _connected_tiles(tile)
 	return tiles.size() != 2
+

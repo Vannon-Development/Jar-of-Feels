@@ -12,7 +12,7 @@ func _physics_process(delta: float):
 
 	if _will_cross_boundary(position, next_pos) or _motion.is_zero_approx():
 		if _motion.is_zero_approx() and _input.is_zero_approx(): return
-		if _input.is_zero_approx(): _input = _motion
+		if _input.is_zero_approx(): _motion = Vector2.ZERO
 		var paths: Array[Vector2] = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
 		var m := _motion.normalized()
 		if not m.is_zero_approx():
