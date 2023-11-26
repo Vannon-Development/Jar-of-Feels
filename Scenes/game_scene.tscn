@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bldhsjfm0rhvh"]
+[gd_scene load_steps=6 format=3 uid="uid://bldhsjfm0rhvh"]
 
 [ext_resource type="PackedScene" uid="uid://4eir2yvvm4ty" path="res://Level/map.tscn" id="1_1jnvk"]
 [ext_resource type="PackedScene" uid="uid://y4s01lj3s316" path="res://Characters/player.tscn" id="1_a7bpo"]
 [ext_resource type="PackedScene" uid="uid://bkyi32oc8ua6r" path="res://Characters/depression.tscn" id="1_nmfnp"]
 [ext_resource type="PackedScene" uid="uid://t7f5fm5hvso" path="res://HUD/hud.tscn" id="4_catoh"]
+[ext_resource type="PackedScene" uid="uid://otb54j188set" path="res://Characters/manic.tscn" id="5_kd316"]
 
 [node name="Game Scene" type="Node2D"]
 
@@ -20,3 +21,6 @@ offset_left = 3072.0
 offset_top = 192.0
 offset_right = 3072.0
 offset_bottom = 192.0
+
+[node name="Manic" parent="." instance=ExtResource("5_kd316")]
+position = Vector2(2144, 1440)

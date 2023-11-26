@@ -11,6 +11,7 @@ func _physics_process(delta: float):
 	var next_pos := position + _motion * _calc_speed() * delta
 
 	if _will_cross_boundary(position, next_pos) or _motion.is_zero_approx():
+		before_center_tile(GameControl.map.current_tile(position))
 		if _motion.is_zero_approx() and _input.is_zero_approx(): return
 		if _input.is_zero_approx(): _motion = Vector2.ZERO
 		var paths: Array[Vector2] = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
@@ -35,10 +36,13 @@ func _physics_process(delta: float):
 				dist -= (bound - position).length()
 				next_pos = bound + next_move * dist
 				_motion = next_move
-		center_tile(GameControl.map.current_tile(next_pos))
+		after_center_tile(GameControl.map.current_tile(position))
 	position = next_pos
 
-func center_tile(_tile: Vector2i):
+func before_center_tile(_tile: Vector2i):
+	pass
+
+func after_center_tile(_tile: Vector2i):
 	pass
 
 func _will_cross_boundary(pos1: Vector2, pos2: Vector2) -> bool:

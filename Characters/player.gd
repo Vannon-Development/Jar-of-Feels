@@ -24,6 +24,19 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed("Jam") and jam_shots != 0:
 		_drop_jam()
 
+func before_center_tile(tile: Vector2i):
+	if randf() < _manic_mod():
+		_input = _motion
+
+func _manic_mod() -> float:
+	var manic_mod: float = 0
+	for item in effects:
+		if item.effect_type == Effect.EffectType.manic:
+			var dist := (global_position - item.global_position).length()
+			var max_dist := item.distance
+			manic_mod += clampf(item.custom_lerp(0, max_dist, 1, .4, dist), .4, 1)
+	return manic_mod
+
 func attach_effect(e: Effect):
 	if effects.find(e) == -1:
 		effects.append(e)
@@ -35,6 +48,11 @@ func detach_effect(e: Effect):
 func _calc_speed() -> float:
 	var speed := super._calc_speed()
 	for item in effects:
+		if item.effect_type == Effect.EffectType.manic:
+			var dist := (global_position - item.global_position).length()
+			var max_dist := item.distance
+			var accel := clampf(item.custom_lerp(0, max_dist, 3, 1, dist), 1, 3)
+			speed *= accel
 		if item.effect_type == Effect.EffectType.depression:
 			var dist := (global_position - item.global_position).length()
 			var max_dist := item.distance

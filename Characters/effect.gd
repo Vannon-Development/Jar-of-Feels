@@ -5,7 +5,7 @@ class_name Effect extends Node2D
 @export var high_alpha: float
 @export var effect_type: EffectType
 
-enum EffectType { depression, anger, anxiety }
+enum EffectType { depression, anger, anxiety, manic }
 
 func color_at(pos: Vector2) -> Color:
 	var col := color
