@@ -9,3 +9,8 @@ func enemy_count(type: Effect.EffectType) -> int:
 	for enemy in enemies:
 		if enemy.base_type() == type: count += 1
 	return count
+
+func clear():
+	map = null
+	player = null
+	enemies = []

@@ -37,14 +37,13 @@ func before_center_tile(tile: Vector2i):
 		_input = Vector2.ZERO
 		_motion = Vector2.ZERO
 		position = GameControl.map.map_to_local(tile)
+		return
 
-func after_center_tile(tile: Vector2i):
-	var moving := tile + Vector2i(_input)
-	var next_tile := GameControl.map.next_tile_on_path(moving, _input)
+	var next_tile := GameControl.map.next_tile_on_path(tile, _input)
 	if next_tile == Vector2i.ZERO:
 		var dir := GameControl.player.position - position
-		next_tile = moving + GameControl.map.choose_path(moving, tile, dir, follow_variance)
-	_input = next_tile - moving
+		next_tile = tile + GameControl.map.choose_path(tile, tile - Vector2i(_input), dir, follow_variance)
+	_input = next_tile - tile
 
 func base_type() -> Effect.EffectType:
 	return Effect.EffectType.none

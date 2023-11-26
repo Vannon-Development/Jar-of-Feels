@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmfxkp1yvm6k7"]
+
+[ext_resource type="Script" path="res://Characters/anger.gd" id="1_kh6eh"]
+[ext_resource type="Script" path="res://Characters/effect.gd" id="2_ys8no"]
+[ext_resource type="Texture2D" uid="uid://dwnerpqap5jdt" path="res://Characters/Anger-Idle.png" id="3_6iqb4"]
+[ext_resource type="Texture2D" uid="uid://d3iiwh5pkhvb5" path="res://Characters/Anger-Walk-1.png" id="4_515y6"]
+[ext_resource type="Texture2D" uid="uid://drroi7a352qji" path="res://Characters/Anger-Walk-2.png" id="5_fatwi"]
+[ext_resource type="Texture2D" uid="uid://bff2l2l7txphy" path="res://Characters/Anger-Jam.png" id="6_tnewv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3i8q"]
+size = Vector2(60, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byyaj"]
+radius = 384.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swq5s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6iqb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_515y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6iqb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fatwi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Anger" type="Area2D" node_paths=PackedStringArray("effect", "idle", "walking", "jam_visual")]
+collision_layer = 4
+collision_mask = 64
+script = ExtResource("1_kh6eh")
+effect = NodePath("Effect")
+idle = NodePath("Idle")
+walking = NodePath("Walk")
+jam_visual = NodePath("Jam")
+jam_timer = 8.0
+step_speed = 4.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n3i8q")
+
+[node name="Effect Area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 33
+monitorable = false
+
+[node name="Effect Collider" type="CollisionShape2D" parent="Effect Area"]
+shape = SubResource("CircleShape2D_byyaj")
+
+[node name="Effect" type="Node2D" parent="."]
+script = ExtResource("2_ys8no")
+color = Color(1, 0.243137, 0.243137, 1)
+distance = 384.0
+high_alpha = 0.4
+effect_type = 2
+
+[node name="Effect2" type="Node2D" parent="."]
+script = ExtResource("2_ys8no")
+color = Color(1, 0.243137, 0.243137, 1)
+distance = 384.0
+high_alpha = 0.4
+effect_type = 2
+
+[node name="Idle" type="Sprite2D" parent="."]
+texture = ExtResource("3_6iqb4")
+
+[node name="Walk" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_swq5s")
+autoplay = "default"
+
+[node name="Jam" type="Sprite2D" parent="."]
+texture = ExtResource("6_tnewv")
+
+[connection signal="area_entered" from="." to="." method="_jam_enter"]
+[connection signal="area_entered" from="Effect Area" to="." method="_area_detected"]
+[connection signal="area_exited" from="Effect Area" to="." method="_area_lost"]

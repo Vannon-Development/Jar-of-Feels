@@ -32,7 +32,7 @@ func _physics_process(delta: float):
 				next_pos = bound
 				_motion = Vector2.ZERO
 			else:
-				var dist = _calc_speed() * delta
+				var dist := _calc_speed() * delta
 				dist -= (bound - position).length()
 				next_pos = bound + next_move * dist
 				_motion = next_move

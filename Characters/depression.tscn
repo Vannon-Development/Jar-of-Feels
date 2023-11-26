@@ -58,7 +58,7 @@ shape = SubResource("CircleShape2D_byyaj")
 
 [node name="Effect" type="Node2D" parent="."]
 script = ExtResource("2_nivk6")
-color = Color(0.101961, 0.160784, 1, 1)
+color = Color(0.352941, 0.372549, 0.901961, 1)
 distance = 384.0
 high_alpha = 0.4
 effect_type = 1
